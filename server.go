@@ -23,8 +23,13 @@ func main() {
 
 	srv := handler.NewDefaultServer(graph.NewExecutableSchema(graph.Config{Resolvers: &graph.Resolver{}}))
 
+	frontendURL := os.Getenv("FRONTEND_URL")
+	if frontendURL == "" {
+		log.Fatal("FRONTEND_URL is not set")
+	}
+
 	c := cors.New(cors.Options{
-		AllowedOrigins:   []string{"http://localhost:3000"},
+		AllowedOrigins:   []string{frontendURL},
 		AllowedMethods:   []string{"GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"},
 		AllowedHeaders:   []string{"Accept", "Authorization", "Content-Type", "X-CSRF-Token"},
 		ExposedHeaders:   []string{"Link"},
@@ -38,6 +43,7 @@ func main() {
 	r.Handle("/query", srv)
 
 	log.Printf("connect to http://localhost:%s/ for GraphQL playground", port)
+	log.Printf("connect to front end %s ", frontendURL)
 	err := http.ListenAndServe(":8080", r)
 	if err != nil {
 		panic(err)

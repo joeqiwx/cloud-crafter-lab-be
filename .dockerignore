@@ -1,0 +1,37 @@
+# Ignore version control directories
+.git
+.gitignore
+
+# Ignore temporary files, logs, and directories created by the operating system or the editor
+*.tmp
+*.temp
+*.log
+*.swp
+.DS_Store
+Thumbs.db
+
+# Ignore build outputs and binary files
+bin/
+obj/
+out/
+build/
+dist/
+*.out
+*.exe
+
+# Ignore dependency directories (handled in build process)
+vendor/
+node_modules/
+docker/
+
+# Ignore test files and specific configuration files that are not needed in production
+*_test.go
+*.yml
+*.yaml
+*.test
+*.md
+
+# Ignore IDE-specific files and configuration files
+.idea/
+*.iml
+.vscode/
